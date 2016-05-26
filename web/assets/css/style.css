@@ -1,0 +1,9 @@
+.deleteRowLink{
+    position: absolute;
+    right: -60px;
+    top: 39px;
+}
+.users li:not(:last-child) { border-bottom:1px solid #e6e6e6; }
+.pos_relative{
+    position: relative;
+}

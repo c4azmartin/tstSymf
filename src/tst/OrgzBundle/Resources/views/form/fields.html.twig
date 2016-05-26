@@ -1,0 +1,20 @@
+{% extends 'form_div_layout.html.twig' %}
+{# Rows #}
+{%- block form_row -%}
+    {% set class='col-xs-2' %}
+    {% if attr.dataclass is defined %}
+        {% set class = attr.dataclass  %}
+    {% endif %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            <small>{{- form_label(form) -}}</small>
+            {{- form_widget(form) -}}
+            {% if form_errors(form)|length %}
+                <div class="alert alert-danger">
+                    {{- form_errors(form) -}}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{%- endblock form_row -%}

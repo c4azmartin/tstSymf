@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Тестовое приложение{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('assets/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+            <link href="{{ asset('assets/css/flat-ui.css') }}" rel="stylesheet">
+            <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+    <div class="container">
+        {% block menu %}{% endblock %}
+        {% block body %}{% endblock %}
+    </div>
+
+        {% block javascripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+            <script src="{{ asset('assets/bootstrap/js/bootstrap.js') }}"></script>
+            <script src="{{ asset('assets/js/script.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

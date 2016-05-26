@@ -1,0 +1,4 @@
+orgz:
+    resource: "@OrgzBundle/Controller/"
+    type:     annotation
+    prefix:   /

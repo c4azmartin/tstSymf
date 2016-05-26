@@ -1,0 +1,68 @@
+<?php
+
+namespace tst\OrgzBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity(repositoryClass="OrganizationRepository")
+ * @ORM\Table(name="tst_organization")
+ * @ORM\Table(name="organization", uniqueConstraints={@ORM\UniqueConstraint(name="org_id_uindex", columns={"id"}), @ORM\UniqueConstraint(name="org_ogrn_uindex", columns={"ogrn"}), @ORM\UniqueConstraint(name="org_oktmo_uindex", columns={"oktmo"})})
+ * @UniqueEntity("ogrn")
+ * @UniqueEntity("oktmo")
+ */
+
+class Organization{
+    /**
+     *@var integer
+     *
+     * @ORM\Id()
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
+
+
+    /**
+     * Bidirectional (INVERSE SIDE)
+     *
+     * @ORM\OneToMany(targetEntity="tst\OrgzBundle\Entity\User", mappedBy="organization",
+     *     cascade={"persist", "remove"})
+     */
+    protected $users;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column( type="string",length=255, nullable=false)
+     */
+
+    protected $title;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="bigint", nullable=true)
+     * @Assert\Type(type="integer")
+     * @Assert\Length(min=13, max=13)
+     */
+    protected $ogrn;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="bigint", unique=true)
+     * @Assert\Type(type="integer")
+     * @Assert\Length(min=11, max=11)
+     */
+    protected $oktmo;
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+}

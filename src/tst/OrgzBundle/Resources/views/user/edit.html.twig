@@ -1,0 +1,52 @@
+{% form_theme edit_form 'OrgzBundle::form/fields.html.twig' %}
+{% extends 'OrgzBundle::base.html.twig' %}
+{% block menu %}
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li role="presentation" class=""><a href="{{ path('organization_index') }}">Главная</a></li>
+            <li role="presentation"><a href="{{ path('user_index') }}">Пользователи</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+
+{% block body %}
+    <h1>Редактирование пользователя</h1>
+
+    {{ form_start(edit_form) }}
+        <div class="row">
+            {{ form_row(edit_form.secondname, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+            {{ form_row(edit_form.firstname, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+            {{ form_row(edit_form.patronymic, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+        </div>
+        <div class="row">
+            {{ form_row(edit_form.date_birth, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+            {{ form_row(edit_form.inn, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+            {{ form_row(edit_form.snils, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+        </div>
+        <div class="row">
+            {{ form_row(edit_form.organization, { 'attr': {'dataclass': 'col-xs-3', 'class':'show form-control'}, 'label_attr':{ 'class':'show'} }) }}
+        </div>
+
+
+
+    <ul class="list-unstyled  row">
+        <li class="col-xs-3">
+            <a href="{{ path('user_index') }}" class="btn btn-lg  btn-primary ">К списку пользователей</a>
+        </li>
+        <li class="col-xs-3">
+            <a href="{{ path('organization_show', { 'id': user.organization.id }) }}" class="btn btn-lg  btn-primary ">Просмотр организации</a>
+        </li>
+        <li class="col-xs-3">
+            <input type="submit" value="Сохранить" class="btn btn-lg btn-black btn-info " />
+        </li>
+        {{ form_end(edit_form) }}
+
+
+        <li class="col-xs-3">
+            {{ form_start(delete_form) }}
+            <input type="submit" class="btn btn-lg btn-black btn-inverse" value="Удалить">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

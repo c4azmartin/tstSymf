@@ -1,0 +1,64 @@
+{% form_theme edit_form 'OrgzBundle::form/fields.html.twig' %}
+{% extends 'OrgzBundle::base.html.twig' %}
+{% block menu %}
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li role="presentation" class=""><a href="{{ path('organization_index') }}">Главная</a></li>
+            <li role="presentation"><a href="{{ path('user_index') }}">Пользователи</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+
+{% block body %}
+<h1>Редактирование {{ organization.title }}</h1>
+
+    {{ form_start(edit_form) }}
+
+    <div class="row">
+        {{ form_row(edit_form.title, { 'attr': {'dataclass': 'col-xs-2'} }) }}
+        {{ form_row(edit_form.ogrn, { 'attr': {'dataclass': 'col-xs-2'} }) }}
+        {{ form_row(edit_form.oktmo, { 'attr': {'dataclass': 'col-xs-2'} }) }}
+    </div>
+    <div>
+
+
+    <h3>Пользователи</h3>
+    <ul class="users list-unstyled" data-prototype="{{ form_widget(edit_form.users.vars.prototype)|e }}">
+        {% if edit_form.users %}
+            {% for user in edit_form.users %}
+            <li>
+                <div class="row pos_relative">
+                    {{ form_row(user.secondname, { 'attr': {'dataclass': 'col-xs-2'} }) }}
+                    {{ form_row(user.firstname, { 'attr': {'dataclass': 'col-xs-2'} }) }}
+                    {{ form_row(user.patronymic, { 'attr': {'dataclass': 'col-xs-2'} }) }}
+                    {{ form_row(user.inn, { 'attr': {'dataclass': 'col-xs-2'} }) }}
+                    {{ form_row(user.snils, { 'attr': {'dataclass': 'col-xs-2'} }) }}
+                    {{ form_row(user.date_birth, { 'attr': {'dataclass': 'col-xs-2'} }) }}
+                    {{ form_row(user.organization, { 'attr': {'dataclass': 'col-xs-2 hidden'} }) }}
+                    <a class="btn btn-default deleteRowLink" href="#">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        {% endif %}
+
+    </ul>
+    <ul class="list-unstyled nav-pills row">
+        <li class="col-xs-3">
+            <a href="{{ path('organization_index') }}" class="btn btn-lg  btn-primary ">К списку</a>
+        </li>
+        <li class="col-xs-3">
+            <input type="submit" value="Сохранить" class="btn btn-lg btn-black btn-info " />
+        </li>
+    {{ form_end(edit_form) }}
+
+
+        <li class="col-xs-3">
+                {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-lg btn-black btn-inverse" value="Удалить">
+                {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

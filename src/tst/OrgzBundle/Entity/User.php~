@@ -1,0 +1,89 @@
+<?php
+
+namespace tst\OrgzBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+/**
+ * @ORM\Entity(repositoryClass="UserRepository")
+ * @ORM\Table(name="tst_user", uniqueConstraints={@ORM\UniqueConstraint(name="users_id_uindex", columns={"id"}), @ORM\UniqueConstraint(name="users_inn_uindex", columns={"inn"}), @ORM\UniqueConstraint(name="users_snils_uindex", columns={"snils"})}, indexes={@ORM\Index(name="users_org_fk", columns={"org_id"})})
+ * @UniqueEntity("snils")
+ * @UniqueEntity("inn")
+ * @ORM\HasLifecycleCallbacks
+ */
+
+class User{
+    /**
+     * @var integer
+     *
+     * @ORM\Id()
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column( type="string",length=255)
+     *
+     * @Assert\NotBlank()
+     */
+    protected $secondname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column( type="string",length=255, nullable=true)
+     */
+    protected $firstname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column( type="string",length=255,nullable=true)
+     */
+    protected $patronymic;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="date",nullable=true)
+     * @Assert\Date()
+     */
+    protected $date_birth;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="bigint", nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=16, max=16)
+     */
+    protected $inn;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="bigint", nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=13, max=13)
+     */
+    protected $snils;
+
+    /**
+     * Bidirectional (OWNING SIDE - FK)
+     *
+     * @ORM\ManyToOne(targetEntity="tst\OrgzBundle\Entity\Organization", inversedBy="users")
+     * @ORM\JoinColumn(name="organization", referencedColumnName="id",onDelete="CASCADE")
+     */
+    protected $organization;
+
+    public function __toString()
+    {
+        return $this->secondname;
+    }
+
+
+}

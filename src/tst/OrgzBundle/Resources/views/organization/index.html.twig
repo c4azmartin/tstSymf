@@ -1,0 +1,59 @@
+{% extends 'OrgzBundle::base.html.twig' %}
+{% block menu %}
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li role="presentation" class="active"><a href="{{ path('organization_index') }}">Главная</a></li>
+            <li role="presentation"><a href="{{ path('user_index') }}">Пользователи</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <h1>Список компаний</h1>
+
+    <div class="row top-buffer ">
+        <div class="pull-left">
+            {{ form_start(form_import) }}
+            {{ form_errors(form_import) }}
+            {{ form_widget(form_import.file, {'attr': {'accept': 'text/xml','class': 'pull-left'}}) }}
+            {{ form_widget(form_import.submit, {'attr': {'class': 'btn btn-lg btn-primary pull-left'}}) }}
+            {{ form_end(form_import) }}
+        </div>
+        <div class="pull-right">
+            <a href="{{ path('organization_new') }}" class="btn btn-large btn-black btn-primary">Добавить компанию</a>
+        </div>
+
+    </div>
+
+    <div class="row top-buffer clearfix">
+        <hr>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Заголовок</th>
+                <th>ОГРН</th>
+                <th>ОКТМО</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for organization in organizations %}
+                <tr>
+                    <td><a href="{{ path('organization_show', { 'id': organization.id }) }}">{{ organization.id }}</a></td>
+                    <td>{{ organization.title }}</td>
+                    <td>{{ organization.ogrn }}</td>
+                    <td>{{ organization.oktmo }}</td>
+                    <td class="text-right">
+                        <a class="btn btn-info" href="{{ path('organization_show', { 'id': organization.id }) }}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                        <a class="btn btn-inverse" href="{{ path('organization_edit', { 'id': organization.id }) }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+{% endblock %}

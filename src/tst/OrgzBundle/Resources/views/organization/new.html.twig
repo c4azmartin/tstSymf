@@ -1,0 +1,40 @@
+{% form_theme form 'OrgzBundle::form/fields.html.twig' %}
+{% extends 'OrgzBundle::base.html.twig' %}
+{% block menu %}
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li role="presentation" class=""><a href="{{ path('organization_index') }}">Главная</a></li>
+            <li role="presentation"><a href="{{ path('user_index') }}">Пользователи</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+
+{% block body %}
+    <h1>Новая организация</h1>
+
+    {{ form_start(form) }}
+    <div class="row">
+        {{ form_row(form.title, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+        {{ form_row(form.ogrn, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+        {{ form_row(form.oktmo, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+    </div>
+    <h3>Пользователи</h3>
+    <ul  class="users list-unstyled" data-prototype="{{ form_widget(form.users.vars.prototype)|e }}">
+        {# iterate over each existing tag and render its only field: name #}
+        {% for user in form.users %}
+            <li>{{ form_row(user.secondname) }}</li>
+        {% endfor %}
+    </ul>
+    <ul class="list-unstyled nav-pills row">
+        <li class="col-xs-3">
+            <a href="{{ path('organization_index') }}" class="btn btn-lg  btn-primary ">К списку</a>
+        </li>
+        <li class="col-xs-3">
+            <input type="submit" value="Создать" class="btn btn-lg btn-black btn-info " />
+        </li>
+
+
+    </ul>
+    {{ form_end(form) }}
+{% endblock %}

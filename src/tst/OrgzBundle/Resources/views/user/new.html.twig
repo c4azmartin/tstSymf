@@ -1,0 +1,42 @@
+{% form_theme form 'OrgzBundle::form/fields.html.twig' %}
+{% extends 'OrgzBundle::base.html.twig' %}
+{% block menu %}
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li role="presentation" class=""><a href="{{ path('organization_index') }}">Главная</a></li>
+            <li role="presentation"><a href="{{ path('user_index') }}">Пользователи</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <h1>Создание пользователя</h1>
+
+    {{ form_start(form) }}
+    <div class="row">
+        {{ form_row(form.secondname, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+        {{ form_row(form.firstname, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+        {{ form_row(form.patronymic, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+    </div>
+    <div class="row">
+        {{ form_row(form.date_birth, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+        {{ form_row(form.inn, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+        {{ form_row(form.snils, { 'attr': {'dataclass': 'col-xs-3'} }) }}
+    </div>
+    <div class="row">
+        {{ form_row(form.organization, { 'attr': {'dataclass': 'col-xs-3', 'class':'show form-control'}, 'label_attr':{ 'class':'show'} }) }}
+    </div>
+
+
+
+    <ul class="list-unstyled  row">
+        <li class="col-xs-3">
+            <a href="{{ path('user_index') }}" class="btn btn-lg  btn-primary ">К списку пользователей</a>
+        </li>
+        <li class="col-xs-3">
+            <input type="submit" value="Сохранить" class="btn btn-lg btn-black btn-info " />
+        </li>
+        {{ form_end(form) }}
+
+    </ul>
+{% endblock %}
