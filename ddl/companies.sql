@@ -1,3 +1,4 @@
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -64,6 +65,24 @@ ALTER TABLE `tst_user`
   ADD UNIQUE KEY `users_snils_uindex` (`snils`),
   ADD UNIQUE KEY `users_inn_uindex` (`inn`),
   ADD KEY `users_org_fk` (`organization`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `organization`
+--
+ALTER TABLE `organization`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `tst_user`
+--
+ALTER TABLE `tst_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
 
 --
 -- Ограничения внешнего ключа таблицы `tst_user`
